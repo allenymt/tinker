@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "i am on onCreate classloader:" + MainActivity.class.getClassLoader().toString());
         //test resource change
         Log.e(TAG, "i am on onCreate string:" + getResources().getString(R.string.test_resource));
-//        Log.e(TAG, "i am on patch onCreate");
+        Log.e(TAG, "i am on patch onCreate1234");
 
         mTvMessage = findViewById(R.id.tv_message);
 
@@ -69,7 +69,19 @@ public class MainActivity extends AppCompatActivity {
         loadPatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+                //./gradlew clean
+                // ./gradlew tinker-sample-android:app:assembleRelease
+                // adb install -r tinker-sample-android/app/build/outputs/apk/release/app-release.apk
+                //cp tinker-sample-android/app/build/outputs/apk/release/app-release.apk  tinker-sample-android/bakApk/
+                //change something
+                // 这里要用绝对路径
+                // java8用相对路径可以，java11必须使用绝对路径。。/gradlew tinkerPatchRelease -POLD_APK=tinker-sample-android/bakApk/app-release.apk  -s
+                //./gradlew tinkerPatchRelease -POLD_APK=/Users/yulun/GitHub/tinker/tinker-sample-android/bakApk/app-release.apk  -s
+                // adb push tinker-sample-android/app/build/outputs/apk/tinkerPatch/release/app-release-patch_signed_7zip.apk /sdcard
+                // click load patch,等待有成功提示后
+                // kill app,restart app
+                // debug 同理
+                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/app-release-patch_signed_7zip.apk");
             }
         });
 

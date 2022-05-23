@@ -1,3 +1,4 @@
+include ':tinker-sample-android:app'
 include ':tinker-commons'
 include ':tinker-android:tinker-android-loader'
 include ':tinker-android:tinker-android-loader-no-op'

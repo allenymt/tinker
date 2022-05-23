@@ -426,9 +426,9 @@ if (buildWithTinker()) {
                             def packageAndroidArtifact = variant.packageApplicationProvider.get()
                             if (packageAndroidArtifact != null) {
                                 try {
-                                    from new File(packageAndroidArtifact.outputDirectory.getAsFile().get(), variant.outputs.first().apkData.outputFileName)
+                                    from new File(packageAndroidArtifact.outputDirectory.getAsFile().get(), variant.outputs.first().variantOutput.outputFileName.get())
                                 } catch (Exception e) {
-                                    from new File(packageAndroidArtifact.outputDirectory, variant.outputs.first().apkData.outputFileName)
+                                    from new File(packageAndroidArtifact.outputDirectory, variant.outputs.first().variantOutput.outputFileName.get())
                                 }
                             } else {
                                 from variant.outputs.first().mainOutputFile.outputFile
